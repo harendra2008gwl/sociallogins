@@ -25,9 +25,9 @@ class ViewController: UIViewController {
     @IBAction func FBLoginClicked(_ sender: UIButton) {
         print("FBLoginClicked")
        
-        let FBLoginManager = FBSDKLoginManager()
+        let FBLoginManager = LoginManager()
         
-        FBLoginManager.logIn(withReadPermissions: ["public_profile", "email"], from: self, handler: { (result, error) in
+        FBLoginManager.logIn(permissions: ["public_profile", "email"], from: self, handler: { (result, error) in
             
             if (result?.isCancelled)! {
                 
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
             } else {
                 if result?.token != nil {
                     
-                    print("FB Token:\(String(describing: result?.token.tokenString))") // send it to your backend server. you can also use graph api here to get more details i.e. first name, last name, friends etc.
+                    print("FB Token:\(String(describing: result?.token?.tokenString))") // send it to your backend server. you can also use graph api here to get more details i.e. first name, last name, friends etc.
                     
                     print("Granted Permissions:\(String(describing: result?.grantedPermissions))")
                     
